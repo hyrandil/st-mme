@@ -170,10 +170,11 @@ button:hover {
   display: grid;
   grid-template-columns: repeat(8, minmax(90px, 1fr));
   gap: 0.5rem;
+  perspective: 1200px;
 }
 
 .map-tile {
-  background: var(--accent-light);
+  background: linear-gradient(160deg, #f7e7c8, #d9b991);
   padding: 0.75rem;
   border-radius: 10px;
   border: 2px solid transparent;
@@ -181,6 +182,37 @@ button:hover {
   text-align: center;
   font-weight: 600;
   position: relative;
+  transform: translateZ(0) rotateX(12deg);
+  transform-style: preserve-3d;
+  box-shadow: 0 10px 18px rgba(60, 40, 20, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.map-tile::before {
+  content: "";
+  position: absolute;
+  inset: 0.4rem;
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), transparent);
+  transform: translateZ(12px);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.map-tile::after {
+  content: "";
+  position: absolute;
+  inset: auto 0.4rem -0.4rem;
+  height: 0.6rem;
+  border-radius: 0 0 8px 8px;
+  background: linear-gradient(90deg, rgba(60, 40, 20, 0.25), rgba(60, 40, 20, 0));
+  transform: translateZ(-12px) rotateX(-8deg);
+  pointer-events: none;
+}
+
+.map-tile:hover {
+  transform: translateY(-4px) rotateX(16deg);
+  box-shadow: 0 16px 26px rgba(60, 40, 20, 0.3);
 }
 
 .map-tile small {
@@ -199,6 +231,23 @@ button:hover {
 
 .map-tile.neutral {
   background: #f5e4c8;
+}
+
+.map-tile.terrain-forest {
+  background: linear-gradient(160deg, #cbe6c7, #7da784);
+}
+
+.map-tile.terrain-hill {
+  background: linear-gradient(160deg, #f2d3a3, #c08a48);
+}
+
+.map-tile.terrain-lake {
+  background: linear-gradient(160deg, #b8d8f2, #5b8bb0);
+  color: #1f2f44;
+}
+
+.map-tile.terrain-plains {
+  background: linear-gradient(160deg, #f6e9b8, #d6c278);
 }
 
 .map-tile.selected {

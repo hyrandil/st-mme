@@ -322,11 +322,19 @@ const renderStats = () => {
   statEls.nobles.textContent = state.nobles;
 };
 
+const terrainTypes = [
+  "terrain-forest",
+  "terrain-hill",
+  "terrain-lake",
+  "terrain-plains"
+];
+
 const renderMap = () => {
   mapEl.innerHTML = "";
   for (let i = 0; i < tileCount; i += 1) {
     const tile = document.createElement("div");
     tile.className = "map-tile";
+    tile.classList.add(terrainTypes[i % terrainTypes.length]);
     const village = state.villages[i];
     if (village) {
       tile.innerHTML = `${village.name} <small>${village.coords}</small>`;
