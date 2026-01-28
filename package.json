@@ -1,0 +1,9 @@
+{
+  "name": "staemme-online-mini",
+  "version": "1.0.0",
+  "description": "Mini browser-based strategy prototype inspired by Die Stämme.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

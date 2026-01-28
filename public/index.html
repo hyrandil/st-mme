@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Stämme Online – Königreichsverwaltung</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="top-bar">
+        <div class="brand">
+          <div class="crest"></div>
+          <div>
+            <h1>Stämme Online – Königreich</h1>
+            <p>Baue, plane und führe dein Stammesreich zum Sieg.</p>
+          </div>
+        </div>
+        <div class="top-actions">
+          <button id="endTurn">Runde beenden</button>
+          <button id="toggleHelp">Hilfe</button>
+        </div>
+      </header>
+
+      <nav class="main-nav">
+        <button class="nav-button active" data-tab="overview">Übersicht</button>
+        <button class="nav-button" data-tab="village">Dorf</button>
+        <button class="nav-button" data-tab="army">Armee</button>
+        <button class="nav-button" data-tab="market">Handel</button>
+        <button class="nav-button" data-tab="reports">Berichte</button>
+        <button class="nav-button" data-tab="map">Karte</button>
+      </nav>
+
+      <main class="layout">
+        <section class="panel" id="overviewPanel" data-tab-panel="overview">
+          <h2>Reichsübersicht</h2>
+          <div class="stats">
+            <div>
+              <h3>Ressourcen</h3>
+              <ul>
+                <li>Holz: <span id="wood">0</span></li>
+                <li>Lehm: <span id="clay">0</span></li>
+                <li>Eisen: <span id="iron">0</span></li>
+                <li>Getreide: <span id="grain">0</span></li>
+                <li>Speicher: <span id="storage">0</span></li>
+                <li>Bevölkerung: <span id="population">0</span></li>
+              </ul>
+            </div>
+            <div>
+              <h3>Einheiten</h3>
+              <ul>
+                <li>Speere: <span id="spears">0</span></li>
+                <li>Schwerter: <span id="swords">0</span></li>
+                <li>Äxte: <span id="axes">0</span></li>
+                <li>Späher: <span id="scouts">0</span></li>
+                <li>Leichte Kavallerie: <span id="lightCavalry">0</span></li>
+                <li>Schwere Kavallerie: <span id="heavyCavalry">0</span></li>
+                <li>Ramme: <span id="rams">0</span></li>
+                <li>Kata: <span id="cats">0</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="overview-grid">
+            <div class="card">
+              <h4>Forschung</h4>
+              <p>Schmiede: Stufe <span id="smithy">0</span></p>
+              <p>Forschungspunkte: <span id="researchPoints">0</span></p>
+              <button id="researchButton">Neue Forschung</button>
+            </div>
+            <div class="card">
+              <h4>Adel</h4>
+              <p>Hof: Stufe <span id="academy">0</span></p>
+              <p>Adelspunkte: <span id="nobles">0</span></p>
+              <button id="trainNoble">Adeligen ausbilden</button>
+            </div>
+            <div class="card">
+              <h4>Verteidigung</h4>
+              <p>Mauer: Stufe <span id="wall">0</span></p>
+              <p>Wachturm: Stufe <span id="watchtower">0</span></p>
+              <button id="upgradeWall">Mauer ausbauen</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" id="villagePanel" data-tab-panel="village">
+          <div class="panel-header">
+            <h2>Dorfverwaltung</h2>
+            <select id="villageSelect"></select>
+          </div>
+          <div id="villageDetails"></div>
+        </section>
+
+        <section class="panel" id="armyPanel" data-tab-panel="army">
+          <h2>Angriffsplanung</h2>
+          <form id="attackForm">
+            <label>
+              Ursprung
+              <select id="originSelect"></select>
+            </label>
+            <label>
+              Ziel
+              <select id="targetSelect"></select>
+            </label>
+            <div class="unit-grid">
+              <label>
+                Speere
+                <input type="number" id="attackSpears" min="0" value="0" />
+              </label>
+              <label>
+                Schwerter
+                <input type="number" id="attackSwords" min="0" value="0" />
+              </label>
+              <label>
+                Äxte
+                <input type="number" id="attackAxes" min="0" value="0" />
+              </label>
+              <label>
+                Späher
+                <input type="number" id="attackScouts" min="0" value="0" />
+              </label>
+              <label>
+                Leichte Kavallerie
+                <input type="number" id="attackLight" min="0" value="0" />
+              </label>
+              <label>
+                Schwere Kavallerie
+                <input type="number" id="attackHeavy" min="0" value="0" />
+              </label>
+              <label>
+                Ramme
+                <input type="number" id="attackRams" min="0" value="0" />
+              </label>
+              <label>
+                Katapult
+                <input type="number" id="attackCats" min="0" value="0" />
+              </label>
+            </div>
+            <label>
+              Angriffstyp
+              <select id="attackType">
+                <option value="raid">Plünderung</option>
+                <option value="assault">Voller Angriff</option>
+                <option value="support">Unterstützung</option>
+              </select>
+            </label>
+            <button type="submit">Angriff planen</button>
+          </form>
+          <div class="planned-attacks">
+            <h3>Geplante Aktionen</h3>
+            <ul id="attackList"></ul>
+          </div>
+        </section>
+
+        <section class="panel" id="marketPanel" data-tab-panel="market">
+          <h2>Handel & Logistik</h2>
+          <div class="market-grid">
+            <div class="card">
+              <h4>Marktstufe</h4>
+              <p>Handelsposten: <span id="marketLevel">0</span></p>
+              <button id="upgradeMarket">Markt ausbauen</button>
+            </div>
+            <div class="card">
+              <h4>Rohstoffe tauschen</h4>
+              <label>Holz <input id="tradeWood" type="number" min="0" value="0" /></label>
+              <label>Lehm <input id="tradeClay" type="number" min="0" value="0" /></label>
+              <label>Eisen <input id="tradeIron" type="number" min="0" value="0" /></label>
+              <label>Getreide <input id="tradeGrain" type="number" min="0" value="0" /></label>
+              <button id="submitTrade">Handel starten</button>
+            </div>
+            <div class="card">
+              <h4>Karawanen</h4>
+              <ul id="tradeQueue"></ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" id="reportsPanel" data-tab-panel="reports">
+          <h2>Berichte</h2>
+          <div class="reports">
+            <ul id="reportList"></ul>
+          </div>
+        </section>
+
+        <section class="panel" id="mapPanel" data-tab-panel="map">
+          <h2>Weltkarte</h2>
+          <div id="map"></div>
+        </section>
+      </main>
+
+      <aside class="panel side-panel" id="queuePanel">
+        <h2>Warteschlangen</h2>
+        <div class="queue-block">
+          <h3>Bauen & Forschen</h3>
+          <ul id="queueList"></ul>
+        </div>
+        <div class="queue-block">
+          <h3>Ausbildung</h3>
+          <ul id="trainingList"></ul>
+        </div>
+      </aside>
+    </div>
+
+    <aside id="helpPanel" class="help hidden">
+      <div class="help-content">
+        <h2>Spielhilfe</h2>
+        <p>
+          Dieser Prototyp bildet einen erweiterten Stämme-Gameplay-Loop ab: Ressourcen werden gesammelt,
+          Gebäude verbessert, Truppen ausgebildet und Angriffe geplant. Jede Runde verarbeitet Bau- und
+          Trainingswarteschlangen, Handel sowie Kampfberichte.
+        </p>
+        <ul>
+          <li>Wechsle zwischen Tabs, um dein Reich ganzheitlich zu verwalten.</li>
+          <li>Baue Holzfäller, Lehmgrube, Eisenmine und Bauernhof, um Einkommen zu erhöhen.</li>
+          <li>Trainiere Truppen im Kasernenbereich und plane Angriffe im Armee-Tab.</li>
+          <li>Nutze den Markt für Rohstofftransfers und beobachte Berichte im Log.</li>
+        </ul>
+        <button id="closeHelp">Schließen</button>
+      </div>
+    </aside>
+
+    <script src="app.js"></script>
+  </body>
+</html>
